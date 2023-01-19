@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AuthTokenService } from './auth-token.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,19 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'angular-EMS-frontend';
+
+  eid: string | null;
+  constructor(public authTokenService: AuthTokenService) {
+    this.eid = this.authTokenService.getEmployeeID()
+   }
+
+  public isLoggedIn(){
+    this.eid = this.authTokenService.getEmployeeID()
+    return this.authTokenService.isLoggedIn()
+  }
+
+  public logout(){
+    this.authTokenService.clear()
+  }
+
 }
